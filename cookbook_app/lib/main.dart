@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -146,6 +146,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class SignInPage extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,18 +162,21 @@ class SignInPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: _nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
               ),
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
               ),
@@ -178,7 +185,7 @@ class SignInPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Implement sign-in functionality
+                _signIn(context);
               },
               child: Text('Sign In'),
             ),
@@ -187,9 +194,26 @@ class SignInPage extends StatelessWidget {
       ),
     );
   }
+
+  void _signIn(BuildContext context) {
+    String name = _nameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+      // Proceed with sign-in logic
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+    }
+  }
 }
 
 class SignUpPage extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -202,18 +226,21 @@ class SignUpPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: _nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
               ),
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Create Password',
               ),
@@ -221,6 +248,7 @@ class SignUpPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             TextField(
+              controller: _confirmPasswordController,
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
               ),
@@ -229,7 +257,7 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Implement sign-up functionality
+                _signUp(context);
               },
               child: Text('Sign Up'),
             ),
@@ -237,6 +265,23 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _signUp(BuildContext context) {
+    String name = _nameController.text.trim();
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    String confirmPassword = _confirmPasswordController.text.trim();
+
+    if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty) {
+      if (password == confirmPassword) {
+        // Proceed with sign-up logic
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Passwords do not match')));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+    }
   }
 }
 
@@ -247,8 +292,36 @@ class FridgeScannerPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Fridge Scanner'),
       ),
-      body: Center(
-        child: Text('Fridge Scanner Page'),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Choose Your Current Food in the Fridge Photos',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Implement file chooser logic
+              },
+              child: Text('Choose Files'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Let Us Help You Cook the Best Food Ever, Offering You Different Recipes!',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
