@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cookbook_app/pages/home_page.dart';
-import 'package:cookbook_app/pages/fridge_scanner_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -15,13 +17,19 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.red, // Try changing to Tomato Red
-          accentColor: Colors.green, // Green
+          primarySwatch: Colors.red,
+          accentColor: Colors.green,
           brightness: Brightness.light,
         ),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(title: 'Flutter Demo Home Page'),
+        '/signin': (context) => SignInPage(),
+        '/signup': (context) => SignUpPage(),
+        '/recipeform': (context) => RecipeFormPage(),
+      },
     );
   }
 }
@@ -72,14 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Scan Fridge'),
             ),
-            // SizedBox(height: 20),
-            // Text(
-              
-            // ),
-            // Text(
-             
-            //   style: Theme.of(context).textTheme.headline4,
-            // ),
+            SizedBox(height: 20), // Adding more space
           ],
         ),
       ),
@@ -114,6 +115,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
+            ListTile(
+              title: Text('Sign In'),
+              onTap: () {
+                Navigator.pushNamed(context, '/signin');
+              },
+            ),
+            ListTile(
+              title: Text('Sign Up'),
+              onTap: () {
+                Navigator.pushNamed(context, '/signup');
+              },
+            ),
+            ListTile(
+              title: Text('Recipe'),
+              onTap: () {
+                Navigator.pushNamed(context, '/recipeform');
+              },
+            ),
           ],
         ),
       ),
@@ -123,5 +142,205 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+}
+
+class SignInPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign In'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Password',
+              ),
+              obscureText: true,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Implement sign-in functionality
+              },
+              child: Text('Sign In'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SignUpPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Name',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Email',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Create Password',
+              ),
+              obscureText: true,
+            ),
+            SizedBox(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                labelText: 'Confirm Password',
+              ),
+              obscureText: true,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Implement sign-up functionality
+              },
+              child: Text('Sign Up'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FridgeScannerPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Fridge Scanner'),
+      ),
+      body: Center(
+        child: Text('Fridge Scanner Page'),
+      ),
+    );
+  }
+}
+
+class RecipeFormPage extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _ingredientsController = TextEditingController();
+  final TextEditingController _instructionsController = TextEditingController();
+  final TextEditingController _cautionsController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Recipe'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: 'Recipe Name',
+              ),
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _ingredientsController,
+              decoration: InputDecoration(
+                labelText: 'Ingredients',
+              ),
+              maxLines: 4,
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _instructionsController,
+              decoration: InputDecoration(
+                labelText: 'Instructions',
+              ),
+              maxLines: 4,
+            ),
+            SizedBox(height: 20),
+            TextField(
+              controller: _cautionsController,
+              decoration: InputDecoration(
+                labelText: 'Cautions',
+              ),
+              maxLines: 4,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _addRecipe(context); // Pass context here
+              },
+              child: Text('Submit Recipe'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _addRecipe(BuildContext context) {
+    String name = _nameController.text.trim();
+    String ingredients = _ingredientsController.text.trim();
+    String instructions = _instructionsController.text.trim();
+    String cautions = _cautionsController.text.trim();
+
+    if (name.isNotEmpty && ingredients.isNotEmpty && instructions.isNotEmpty && cautions.isNotEmpty) {
+      Map<String, dynamic> recipeData = {
+        'name': name,
+        'ingredients': ingredients,
+        'instructions': instructions,
+        'cautions': cautions,
+      };
+
+      try {
+        FirebaseFirestore.instance.collection('Recipes').add(recipeData);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Recipe added successfully')));
+        _nameController.clear();
+        _ingredientsController.clear();
+        _instructionsController.clear();
+        _cautionsController.clear();
+      } catch (e) {
+        print('Error adding recipe: $e');
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to add recipe')));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+    }
   }
 }
