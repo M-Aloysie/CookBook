@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cookbook_app/pages/sign_up.dart';
+import 'package:cookbook_app/pages/interest.dart';
 
 void main() {
   runApp(MyApp());
@@ -110,6 +111,10 @@ class SignInPage extends StatelessWidget {
 
     if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
       // Proceed with sign-in logic
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InterestScreen()),
+      );
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Please fill in all fields')));
