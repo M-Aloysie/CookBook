@@ -1,6 +1,5 @@
-// sign_up.dart
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookbook_app/pages/sign_in.dart';
 
 void main() {
@@ -27,7 +26,14 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create an account\nlet\'s help you setup your account'),
+        title: Text(
+          'Welcome, let\'s help you setup your account!',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 27, 126, 77),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -38,6 +44,11 @@ class SignUpPage extends StatelessWidget {
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
             ),
             SizedBox(height: 20),
@@ -45,6 +56,11 @@ class SignUpPage extends StatelessWidget {
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
             ),
             SizedBox(height: 20),
@@ -52,6 +68,11 @@ class SignUpPage extends StatelessWidget {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Create Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
               obscureText: true,
             ),
@@ -60,17 +81,26 @@ class SignUpPage extends StatelessWidget {
               controller: _confirmPasswordController,
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
               obscureText: true,
             ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                _signUp(context);
+                // Navigate to the sign-in page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignInPage()),
+                );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
+                primary: Colors.orange,
+                onPrimary: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -81,7 +111,6 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                // Navigate to the sign-in page
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignInPage()),
@@ -98,8 +127,8 @@ class SignUpPage extends StatelessWidget {
                 // Handle sign-up with Google logic
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
+                primary: Colors.black,
+                onPrimary: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -124,7 +153,17 @@ class SignUpPage extends StatelessWidget {
         password.isNotEmpty &&
         confirmPassword.isNotEmpty) {
       if (password == confirmPassword) {
-        // Proceed with sign-up logic
+        CollectionReference collRef =
+            FirebaseFirestore.instance.collection('new_users');
+        collRef.add({
+          'name': name,
+          'email': email,
+          'password': password,
+          'confirmPassword': confirmPassword,
+        });
+
+        // Navigate to the interest screen or any other screen after sign-up
+        // Here you can add the logic to navigate to the next screen
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Passwords do not match')));

@@ -1,6 +1,5 @@
-// sign_in.dart
-
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookbook_app/pages/sign_up.dart';
 import 'package:cookbook_app/pages/interest.dart';
 
@@ -26,7 +25,14 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hello,\nWelcome Back!'),
+        title: Text(
+          'Hello, Welcome Back!',
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 25, 137, 64), // Set the background color of the AppBar
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -37,6 +43,11 @@ class SignInPage extends StatelessWidget {
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
             ),
             SizedBox(height: 20),
@@ -44,6 +55,11 @@ class SignInPage extends StatelessWidget {
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
             ),
             SizedBox(height: 20),
@@ -51,6 +67,11 @@ class SignInPage extends StatelessWidget {
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
               ),
               obscureText: true,
             ),
@@ -60,11 +81,11 @@ class SignInPage extends StatelessWidget {
                 _signIn(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.all(20),
+                primary: Colors.orange,
+                onPrimary: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               child: Text('Sign In'),
@@ -72,15 +93,16 @@ class SignInPage extends StatelessWidget {
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
-                // Navigate to the sign-up page
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SignUpPage()),
                 );
               },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+              ),
               child: Text(
                 "Don't have an account? Sign Up",
-                style: TextStyle(color: Color.fromARGB(255, 244, 152, 4)),
               ),
             ),
             SizedBox(height: 10),
@@ -89,8 +111,8 @@ class SignInPage extends StatelessWidget {
                 // Handle sign-in with Google logic
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
+                primary: Colors.black,
+                onPrimary: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -110,14 +132,20 @@ class SignInPage extends StatelessWidget {
     String password = _passwordController.text.trim();
 
     if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
-      // Proceed with sign-in logic
+      CollectionReference collRef = FirebaseFirestore.instance.collection('users');
+      collRef.add({
+        'name': name,
+        'email': email,
+        'password': password,
+      });
+
+      // Navigate to the interest screen or any other screen after sign-in
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => InterestScreen()),
       );
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
     }
   }
 }
