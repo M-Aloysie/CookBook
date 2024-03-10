@@ -3,8 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:cookbook_app/pages/sign_up.dart';
 import 'package:cookbook_app/pages/interest.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -110,6 +114,8 @@ class SignInPage extends StatelessWidget {
     String password = _passwordController.text.trim();
 
     if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+      // call function to add data to the firestore
+      addData(name, email, password);
       // Proceed with sign-in logic
       Navigator.push(
         context,
@@ -120,4 +126,14 @@ class SignInPage extends StatelessWidget {
           .showSnackBar(SnackBar(content: Text('Please fill in all fields')));
     }
   }
+}
+
+// addData function to add data to firestore
+
+Future<void> addData(String name, String email, String password) async {
+  await FirebaseFirestore.instance.collection('users').add({
+    'name': name,
+    'email': email,
+    'password': password,
+  });
 }
