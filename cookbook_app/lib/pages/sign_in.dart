@@ -1,8 +1,13 @@
+import 'dart:html';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookbook_app/pages/sign_up.dart';
 import 'package:cookbook_app/pages/interest.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
@@ -24,6 +29,39 @@ class SignInPage extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance; // new
+  final GoogleSignIn _googleSignIn =
+      GoogleSignIn(); // to initialize Google sign-in
+
+  // for signing in with google
+  Future<void> _signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser =
+          await _googleSignIn.signIn(); // Use _googleSignIn
+      if (googleUser == null) {
+        return; // User canceled the sign-in
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => InterestScreen()),
+      );
+    } catch (e) {
+      print('Error signing in with Google: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error signing in with Google')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +151,9 @@ class SignInPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                // Handle sign-in with Google logic
+              onPressed: () async {
+                // Handlling sign-in with Google logic
+                await _signInWithGoogle(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
