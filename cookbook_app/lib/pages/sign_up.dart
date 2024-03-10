@@ -99,8 +99,8 @@ class SignUpPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
-                onPrimary: Colors.white,
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -127,8 +127,8 @@ class SignUpPage extends StatelessWidget {
                 // Handle sign-up with Google logic
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
-                onPrimary: Colors.white,
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),

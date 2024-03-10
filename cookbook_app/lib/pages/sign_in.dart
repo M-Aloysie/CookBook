@@ -86,8 +86,8 @@ class SignInPage extends StatelessWidget {
                 _signIn(context);
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
-                onPrimary: Colors.white,
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 32.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -117,8 +117,8 @@ class SignInPage extends StatelessWidget {
                 // Handle sign-in with Google logic
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.black,
-                onPrimary: Colors.white,
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.all(20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
