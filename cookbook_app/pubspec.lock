@@ -94,7 +94,11 @@ packages:
     description:
       name: firebase_auth
       sha256: "17b841e1b000c3441b8ffceca88f468e078d0443db9643e77541bdfb7a3fd16b"
+<<<<<<< HEAD
       url: "https://pub.dev"
+=======
+      url: "https://pub.flutter-io.cn"
+>>>>>>> 3355d6728cea7faecf52fbb402dabbe630990848
     source: hosted
     version: "4.17.8"
   firebase_auth_platform_interface:
@@ -102,7 +106,11 @@ packages:
     description:
       name: firebase_auth_platform_interface
       sha256: f294ceef40409a36c819a14280ca864fe487b44033e5276443377c66cb448310
+<<<<<<< HEAD
       url: "https://pub.dev"
+=======
+      url: "https://pub.flutter-io.cn"
+>>>>>>> 3355d6728cea7faecf52fbb402dabbe630990848
     source: hosted
     version: "7.1.8"
   firebase_auth_web:
@@ -110,7 +118,11 @@ packages:
     description:
       name: firebase_auth_web
       sha256: "1f231da900fe7ff9f2974f8adcbdb3363c410c24725978afa5dc33e1e7e62e06"
+<<<<<<< HEAD
       url: "https://pub.dev"
+=======
+      url: "https://pub.flutter-io.cn"
+>>>>>>> 3355d6728cea7faecf52fbb402dabbe630990848
     source: hosted
     version: "5.9.8"
   firebase_core:
