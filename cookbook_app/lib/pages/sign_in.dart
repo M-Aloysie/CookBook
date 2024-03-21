@@ -2,10 +2,6 @@ import 'dart:html';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cookbook_app/pages/user_specific_screen.dart';
-=======
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cookbook_app/pages/sign_up.dart';
 import 'package:cookbook_app/pages/interest.dart';
@@ -28,9 +24,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
->>>>>>> 3355d6728cea7faecf52fbb402dabbe630990848
 
 class SignInPage extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance; // new
@@ -79,17 +75,25 @@ class SignInPage extends StatelessWidget {
           ),
         ),
         backgroundColor: Color.fromARGB(
-          255,
-          25,
-          137,
-          64,
-        ), // Set the background color of the AppBar
+            255, 25, 137, 64), // Set the background color of the AppBar
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: 'Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                filled: true,
+                fillColor: Colors.grey[200],
+              ),
+            ),
+            SizedBox(height: 20),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -129,8 +133,6 @@ class SignInPage extends StatelessWidget {
               ),
               child: Text('Sign In'),
             ),
-<<<<<<< HEAD
-=======
             SizedBox(height: 20),
             TextButton(
               onPressed: () {
@@ -163,38 +165,44 @@ class SignInPage extends StatelessWidget {
               ),
               child: Text('Sign In with Google'),
             ),
->>>>>>> 3355d6728cea7faecf52fbb402dabbe630990848
           ],
         ),
       ),
     );
   }
 
-  void _signIn(BuildContext context) async {
+  void _signIn(BuildContext context) {
+    String name = _nameController.text.trim();
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (email.isNotEmpty && password.isNotEmpty) {
-      try {
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        User? user = userCredential.user;
+    if (name.isNotEmpty && email.isNotEmpty && password.isNotEmpty) {
+      CollectionReference collRef =
+          FirebaseFirestore.instance.collection('users');
+      collRef.add({
+        'name': name,
+        'email': email,
+        'password': password,
+      });
 
-        if (user != null) {
-          // User signed in successfully, navigate to user-specific screen
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => UserSpecificScreen(user.uid)),
-          );
-        }
-      } catch (e) {
-        print('Sign-in failed: $e');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sign-in failed')));
-      }
+      // Navigate to the interest screen or any other screen after sign-in
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InterestScreen()),
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please fill in all fields')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Please fill in all fields')));
     }
   }
+}
+
+// addData function to add data to firestore
+
+Future<void> addData(String name, String email, String password) async {
+  await FirebaseFirestore.instance.collection('users').add({
+    'name': name,
+    'email': email,
+    'password': password,
+  });
 }
