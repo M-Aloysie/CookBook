@@ -74,6 +74,11 @@ flutter:
     - assets/images/home_page.png
     - assets/images/cooking.jpg
     - assets/images/recipes.png
+    - assets/images/brochete.jpg
+    - assets/images/rice_and_meat.jpg
+    - assets/images/spagheti.jpg
+    - assets/images/potatoes.jpg
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

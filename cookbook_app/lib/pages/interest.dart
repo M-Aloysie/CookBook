@@ -1,3 +1,4 @@
+import 'package:cookbook_app/pages/recipes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -72,8 +73,10 @@ class _InterestScreenState extends State<InterestScreen> {
             margin: EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Add logic to handle the "Continue" button press
-                // For example, you can navigate to the next screen or perform some action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RecipesScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor:
