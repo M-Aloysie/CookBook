@@ -18,7 +18,7 @@ class SpaghettiMincedMeatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spaghetti with Minced Meat Recipe'),
+        title: Text('Spaghetti with Minced Meat Recipe Details'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
