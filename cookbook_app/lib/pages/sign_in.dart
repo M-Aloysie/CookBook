@@ -1,4 +1,4 @@
-import 'dart:html';
+// import 'dart:html';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -83,6 +83,7 @@ class SignInPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              key: Key('name_field'),
               controller: _nameController,
               decoration: InputDecoration(
                 labelText: 'Name',
@@ -95,6 +96,7 @@ class SignInPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             TextField(
+              key: Key('email_field'),
               controller: _emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -107,6 +109,7 @@ class SignInPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             TextField(
+              key: Key('password_field'),
               controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -120,6 +123,7 @@ class SignInPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
+              key: Key('sign_in_button'),
               onPressed: () {
                 _signIn(context);
               },
