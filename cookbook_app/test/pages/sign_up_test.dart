@@ -29,11 +29,6 @@ void main() {
     await tester.enterText(
         find.byKey(Key('confirm_password_field')), 'different');
 
-    // // Tap the sign-up button
-    // await tester.tap(find.byKey(Key('sign_up_button')));
-    // await tester.pump();
-
-    // // Verify that the appropriate error message is shown
-    // expect(find.text('Passwords do not match'), findsOneWidget);
+    await tester.pump();
   });
 }
