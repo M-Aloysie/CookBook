@@ -33,7 +33,7 @@ class BrocheteScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              'Brochete Recipe',
+              'Brochete',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,

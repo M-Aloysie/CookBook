@@ -33,7 +33,7 @@ class BeefAndRiceSoupScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              'Beef and Rice Soup Recipe',
+              'Beef and Rice Soup',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
