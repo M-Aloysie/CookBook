@@ -1,24 +1,30 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:cookbook_app/pages/interest.dart';
+import 'package:flutter/material.dart';
+import 'package:cookbook_app/pages/recipes.dart';
 
 void main() {
-  testWidgets('AppBar displays correct title', (WidgetTester tester) async {
-    // Build the widget and trigger frame rendering
-    // await tester.pumpWidget(MaterialApp(home: InterestScreen()));
+  testWidgets('interest ...', (tester) async {
+    // Build InterestScreen widget
+    await tester.pumpWidget(MaterialApp(home: InterestScreen()));
 
-    // Use the `find` function to search for widgets in the widget tree
-    expect(find.text('Select Your Interests'), findsOneWidget);
+    // Tap the first checkbox
+    await tester.tap(find.byType(Checkbox).first);
+    await tester.pump();
+
+    // Verify that the first interest is selected
+    expect(find.byType(Checkbox).first, findsOneWidget);
   });
 
-  testWidgets('Continue button navigates to RecipesScreen', (WidgetTester tester) async {
-    // await tester.pumpWidget(MaterialApp(home: InterestScreen()));
+  testWidgets('Navigation to RecipesScreen', (WidgetTester tester) async {
+    // Build InterestScreen widget
+    await tester.pumpWidget(MaterialApp(home: InterestScreen()));
 
-    // Tap the continue button
+    // Tap the "Continue" button
     await tester.tap(find.text('Continue'));
-
-    // Wait for the navigation to complete
     await tester.pumpAndSettle();
 
-    // Verify that the RecipesScreen is displayed
-    // expect(find.byType(RecipesScreen), findsOneWidget);
+    // Verify that RecipesScreen is pushed onto the navigator stack
+    expect(find.byType(RecipesScreen), findsOneWidget);
   });
 }

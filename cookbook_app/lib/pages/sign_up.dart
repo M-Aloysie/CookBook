@@ -96,6 +96,7 @@ class SignUpPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
+                key: Key('sign_up_button'),
                 onPressed: () {
                   // Navigate to the sign-in page
                   Navigator.push(
@@ -128,6 +129,7 @@ class SignUpPage extends StatelessWidget {
               ),
               SizedBox(height: 10),
               ElevatedButton(
+                key: Key('google_button'),
                 onPressed: () {
                   // Handle sign-up with Google logic
                 },
