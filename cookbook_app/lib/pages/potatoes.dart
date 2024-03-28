@@ -35,7 +35,7 @@ class PotatoesWithMeatScreen extends StatelessWidget {
             SizedBox(height: 16.0),
             // Recipe Title
             Text(
-              'Potatoes with Meat',
+              'Potatoes with Meat, the delicious meal',
               style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
