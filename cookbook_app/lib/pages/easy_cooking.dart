@@ -111,7 +111,11 @@ class EasyCookingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTechniqueRecipe({required String imagePath, required String caption, required String recipe}) {
+  Widget _buildTechniqueRecipe({
+    required String imagePath,
+    required String caption,
+    required String recipe,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

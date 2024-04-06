@@ -1,6 +1,7 @@
 import 'package:cookbook_app/pages/recipes.dart';
 import 'package:cookbook_app/pages/easy_cooking.dart';
-import 'package:cookbook_app/pages/healthy_living.dart'; 
+import 'package:cookbook_app/pages/healthy_living.dart';
+import 'package:cookbook_app/pages/recipe.dart';
 import 'package:cookbook_app/pages/desserts_sweets.dart'; // Import the desserts_sweets.dart file
 import 'package:cookbook_app/pages/vegetarian_vegan.dart'; // Import the vegetarian_vegan.dart file
 import 'package:cookbook_app/pages/baking_basics.dart'; // Import the baking_basics.dart file
@@ -25,7 +26,8 @@ class InterestScreen extends StatefulWidget {
 }
 
 class _InterestScreenState extends State<InterestScreen> {
-  int selectedIndex = -1; // Index of the selected interest, -1 means none selected
+  int selectedIndex =
+      -1; // Index of the selected interest, -1 means none selected
 
   List<Map<String, dynamic>> interests = [
     {
@@ -50,18 +52,21 @@ class _InterestScreenState extends State<InterestScreen> {
       'title': 'Desserts & Sweets',
       'image': 'assets/images/desserts_sweets.jpg',
       'description': 'Indulge in delicious dessert recipes and sweet treats.',
-      'page': DessertsSweetsScreen(), // Add the page widget for Desserts & Sweets
+      'page':
+          DessertsSweetsScreen(), // Add the page widget for Desserts & Sweets
     },
     {
       'title': 'Vegetarian & Vegan',
       'image': 'assets/images/vegetarian_vegan.jpg',
       'description': 'Explore plant-based recipes for vegetarians and vegans.',
-      'page': VegetarianVeganScreen(), // Add the page widget for Vegetarian & Vegan
+      'page':
+          VegetarianVeganScreen(), // Add the page widget for Vegetarian & Vegan
     },
     {
       'title': 'Baking Basics',
       'image': 'assets/images/baking_basics.jpg',
-      'description': 'Learn essential baking techniques and recipes for beginners.',
+      'description':
+          'Learn essential baking techniques and recipes for beginners.',
       'page': BakingBasicsScreen(), // Add the page widget for Baking Basics
     },
     // Add more interests as needed
@@ -83,9 +88,31 @@ class _InterestScreenState extends State<InterestScreen> {
               },
             ),
           ),
+          // Added text widget with instructions
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "OR\n Get help in discovering your own recipes based on your ingredients",
+              style: TextStyle(fontSize: 16.0),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          // Added button widget to navigate to RecipeScreen
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RecipeScreen(),
+                ),
+              );
+            },
+            child: Text("Discover Recipes"),
+          ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: ElevatedButton(
               onPressed: selectedIndex == -1
                   ? null
@@ -93,12 +120,14 @@ class _InterestScreenState extends State<InterestScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => interests[selectedIndex]['page'],
+                          builder: (context) =>
+                              interests[selectedIndex]['page'],
                         ),
                       );
                     },
               style: ElevatedButton.styleFrom(
-                backgroundColor: selectedIndex == -1 ? Colors.grey : Colors.yellow[700],
+                backgroundColor:
+                    selectedIndex == -1 ? Colors.grey : Colors.yellow[700],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

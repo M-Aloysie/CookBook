@@ -82,7 +82,9 @@ flutter:
     - assets/images/spagheti.jpg
     - assets/images/potatoes.jpg
     - assets/images/chocolate_chip_cookies.jpg
-
+    - assets/images/eggs.jpg
+    - assets/images/sauteing.jpg
+    - assets/images/water.jpg
 
   #   - images/a_dot_ham.jpeg
 

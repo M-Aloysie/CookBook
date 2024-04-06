@@ -16,7 +16,8 @@ class HealthyLivingScreen extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/healthy_living.jpg'), // Replace with your image path
+                  image: AssetImage(
+                      'assets/images/eggs.jpg'), // Replace with your image path
                   fit: BoxFit.cover,
                 ),
               ),
@@ -44,7 +45,7 @@ class HealthyLivingScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             _buildTipItem(
-              imagePath: 'assets/images/fruits_vegetables.jpg',
+              imagePath: 'assets/images/sauteing.jpg',
               caption: 'Eat a Balanced Diet',
               tip: '''
                 A balanced diet rich in fruits, vegetables, whole grains, and lean proteins is essential for maintaining good health. Here's a simple recipe for a nutritious smoothie:
@@ -135,7 +136,10 @@ class HealthyLivingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTipItem({required String imagePath, required String caption, required String tip}) {
+  Widget _buildTipItem(
+      {required String imagePath,
+      required String caption,
+      required String tip}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
       child: Column(
