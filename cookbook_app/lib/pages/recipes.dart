@@ -3,6 +3,7 @@ import 'package:cookbook_app/pages/potatoes.dart';
 import 'package:cookbook_app/pages/brochete.dart';
 import 'package:cookbook_app/pages/beef_rice.dart';
 import 'package:cookbook_app/pages/spagheti.dart';
+import 'package:cookbook_app/pages/easy_cooking.dart';
 
 void main() {
   runApp(MyApp());
