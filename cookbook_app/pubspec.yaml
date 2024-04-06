@@ -31,8 +31,11 @@ dependencies:
   flutter:
     sdk: flutter
  
-  
-     
+  http: ^0.13.5
+  # http allow us to send request to api to get data
+  webview_flutter: ^4.0.0
+  # webview_flutter allow us to view web pages within our app
+
   
      
   
