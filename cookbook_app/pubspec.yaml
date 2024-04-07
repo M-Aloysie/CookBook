@@ -35,6 +35,9 @@ dependencies:
   # http allow us to send request to api to get data
   webview_flutter: ^4.0.0
   # webview_flutter allow us to view web pages within our app
+  flutter_dotenv: ^5.1.0
+  dotenv: ^3.0.0
+  # flutter_dotenv allow us to use .env file in our app
 
   
      
@@ -74,6 +77,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - .env
     - assets/images/home_page.png
     - assets/images/cooking.jpg
     - assets/images/recipes.png
@@ -85,6 +89,11 @@ flutter:
     - assets/images/eggs.jpg
     - assets/images/sauteing.jpg
     - assets/images/water.jpg
+    - assets/images/no-stress.jpg
+    - assets/images/live-healthy.jpg
+    - assets/images/balanced-diet.jpg
+    - assets/images/exercise.jpg
+    - assets/images/sleep.jpg
 
   #   - images/a_dot_ham.jpeg
 

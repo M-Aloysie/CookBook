@@ -17,7 +17,7 @@ class HealthyLivingScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                      'assets/images/eggs.jpg'), // Replace with your image path
+                      'assets/images/live-healthy.jpg'), // Replace with your image path
                   fit: BoxFit.cover,
                 ),
               ),
@@ -45,7 +45,7 @@ class HealthyLivingScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             _buildTipItem(
-              imagePath: 'assets/images/sauteing.jpg',
+              imagePath: 'assets/images/balanced-diet.jpg',
               caption: 'Eat a Balanced Diet',
               tip: '''
                 A balanced diet rich in fruits, vegetables, whole grains, and lean proteins is essential for maintaining good health. Here's a simple recipe for a nutritious smoothie:
@@ -118,7 +118,7 @@ class HealthyLivingScreen extends StatelessWidget {
               ''',
             ),
             _buildTipItem(
-              imagePath: 'assets/images/stress.jpg',
+              imagePath: 'assets/images/no-stress.jpg',
               caption: 'Manage Stress',
               tip: '''
                 Managing stress is crucial for overall health and well-being. Here are some relaxation techniques to try:
