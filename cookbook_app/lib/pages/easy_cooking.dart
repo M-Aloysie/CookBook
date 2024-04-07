@@ -119,30 +119,40 @@ class EasyCookingScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            imagePath,
-            height: 120.0,
-            width: 120.0,
-            fit: BoxFit.cover,
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 5,
+                offset: Offset(0, 2), // changes position of shadow
+              ),
+            ],
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              caption,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
         SizedBox(height: 8.0),
         Text(
-          caption,
-          style: TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.green[700], // Change the text color
-          ),
-        ),
-        SizedBox(height: 4.0),
-        Text(
           recipe,
           style: TextStyle(
-            fontSize: 14.0,
-            color: Colors.grey[700], // Change the text color
+            fontSize: 16,
+            color: Colors.grey[800],
           ),
         ),
         SizedBox(height: 20.0),

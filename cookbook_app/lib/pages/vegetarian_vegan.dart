@@ -14,7 +14,7 @@ class VegetarianVeganScreen extends StatelessWidget {
           children: [
             _buildSectionTitle('Welcome to the Vegetarian & Vegan World'),
             _buildImageWithCaption(
-              imagePath: 'assets/images/vegetarian_vegan.jpg',
+              imagePath: 'assets/images/vegetarian.jpg',
               caption: 'Discover the Delicious World of Plant-Based Eating',
             ),
             _buildAdviceSection(),
