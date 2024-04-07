@@ -42,7 +42,7 @@ class DessertsSweetsScreen extends StatelessWidget {
               ''',
             ),
             _buildDessertItem(
-              imagePath: 'assets/images/fruit_tart.jpg',
+              imagePath: 'assets/images/desserts1.jpg',
               name: 'Fruit Tart',
               recipe: '''
                 Fruit Tart Recipe:

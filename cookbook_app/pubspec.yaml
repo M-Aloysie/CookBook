@@ -85,6 +85,12 @@ flutter:
     - assets/images/eggs.jpg
     - assets/images/sauteing.jpg
     - assets/images/water.jpg
+    - assets/images/vegetarian.jpg
+    - assets/images/desserts1.jpg
+    - assets/images/chocolate_cake.jpg
+    - assets/images/quinoa_salad.jpg
+    - assets/images/vegetarian_chili.jpg
+    - assets/images/banana_bread.jpg
 
   #   - images/a_dot_ham.jpeg
 
